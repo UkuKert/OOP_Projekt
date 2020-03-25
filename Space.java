@@ -19,8 +19,6 @@ public class Space {
         this.mark = mark;
     }
 
-    //see tostring saab välja vahetada switch{ case CROSS asda, case NOUGHT asd vastu https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
-
     @Override
     public String toString() {
         return String.valueOf(mark);

@@ -5,8 +5,6 @@ public class Board {
         this.spaces = spaces;
     }
 
-    //see on ehitaja mis teeb tühja mänguvälja, ehk ei kutsu constructori vaid selle.
-    // kasutatud siis kahe kordinaadiga süsteemi ehk 1 väli on spaces[0][0] jne lihtsam kontrollida kui ühte jada
     public static Board buildEmptyBoard() {
         Space[][] spaces = new Space[3][3];
         for (int i = 0; i < spaces.length; i++) {
@@ -17,7 +15,6 @@ public class Board {
         return new Board(spaces);
     }
 
-    // vajab eelkontrolli et antud number on vahemikus 1-9
     public Mark getSpaceMark(int spaceNumber) {
         if (spaceNumber <= 3) {
             return this.spaces[0][spaceNumber - 1].getMark();
@@ -28,7 +25,6 @@ public class Board {
         }
     }
 
-    // vajab eelkontrolli et antud number on vahemikus 1-9
     public void setSpaceMark(int spaceNumber, Mark mark) {
         if (spaceNumber <= 3) {
             this.spaces[0][spaceNumber - 1].setMark(mark);
@@ -39,7 +35,7 @@ public class Board {
         }
     }
 
-    // kontrollib, kas space on tühi
+    //kontrollib, kas space on tühi
     public boolean checkSpace(int spaceNumber) {
         if (spaceNumber <= 3) {
             return this.spaces[0][spaceNumber - 1].getMark() == Mark.EMPTY;
@@ -50,7 +46,6 @@ public class Board {
         }
     }
 
-    //kontroll, kas X või O on mängu võitnud
     public boolean hasWon(Mark mark) {
         if (getSpaceMark(1) == mark) {
             if (getSpaceMark(5) == mark) {

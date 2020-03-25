@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,12 +23,12 @@ public class Game {
             player1.setPlayer(computer);
             player2.setPlayer(human);
         }
+
         for (int i = 0; i < 5; i++) {
             drawBoard();
             turn(player1);
             drawBoard();
 
-            // kontroll kas esimene mängija on võitnud
             if (checkIfWin(player1)) break;
 
             // kontrollib, kas on mängu viimane samm. Kui on, siis deklareerib viigi sest kõik ruudud on täis ja võitu pole siiani kuulutatud .
@@ -40,12 +39,10 @@ public class Game {
             }
             turn(player2);
 
-            // kontroll kas teine mängija on võitnud
             if (checkIfWin(player2)) break;
         }
     }
 
-    //Kontrollib, kas vastav mängija on võitnud, kui on, siis prindib võidu või kaotussõnumi.
     private boolean checkIfWin(Player player) {
         if (board.hasWon(player.getMark())) {
             drawBoard();
@@ -76,11 +73,26 @@ public class Game {
     private static int getPlayerPick(Board board, Scanner scanner) {
         while (true) {
             System.out.println("which field?");
-            int playerPick = scanner.nextInt();
-            if (board.checkSpace(playerPick)) {
-                return playerPick;
+
+            while (true){
+                try {
+                    int playerPick = Integer.parseInt(scanner.next());
+
+                    if (!(playerPick <= 9 && playerPick >= 1)){
+                        System.out.println("invalid input. only number between 1-9 allowed!");
+                        continue;
+                    }
+
+                    if (board.checkSpace(playerPick)) {
+                        return playerPick;
+                    } else {
+                        System.out.println("field already filled!");
+                    }
+                } catch(NumberFormatException e){
+                    System.out.println("invalid input. only number between 1-9 allowed!");
+                    continue;
+                }
             }
-            System.out.println("filed already filled!");
         }
     }
 
@@ -101,9 +113,8 @@ public class Game {
         return Mark.CROSS;
     }
 
-    //funktsioon, mis joonistab mängulaua
     public void drawBoard() {
-        System.out.println("┌───┬───┬───┐");
+        System.out.println("┌───┬───┬───┑");
         System.out.println("│ " + markToString(board.getSpaceMark(1)) + " │ " + markToString(board.getSpaceMark(2)) + " │ " + markToString(board.getSpaceMark(3)) + " │");
         System.out.println("├───┼───┼───┤");
         System.out.println("│ " + markToString(board.getSpaceMark(4)) + " │ " + markToString(board.getSpaceMark(5)) + " │ " + markToString(board.getSpaceMark(6)) + " │");
