@@ -83,7 +83,7 @@ public class Game {
                         continue;
                     }
 
-                    if (board.checkSpace(playerPick)) {
+                    if (board.checkIfSpaceEmpty(playerPick)) {
                         return playerPick;
                     } else {
                         System.out.println("field already filled!");
