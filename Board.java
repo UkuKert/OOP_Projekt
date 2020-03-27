@@ -36,7 +36,7 @@ public class Board {
     }
 
     public boolean checkIfSpaceEmpty(int spaceNumber) {
-        return this.getSpaceMark() == Mark.EMPTY;
+        return this.getSpaceMark(spaceNumber) == Mark.EMPTY;
     }
 
     public boolean hasWon(Mark mark) {
